@@ -4,6 +4,7 @@ import backgroundImage from "./assets/dark_space.jpg";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Switch, Route }  from "react-router-dom";
 import AppFooter from "./components/AppFooter";
+import { ApolloConsumer } from "@apollo/client";
 function App() {
   return (
     <AppContainer>
@@ -15,7 +16,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <AppFooter/>
+      <AppFooter />
     </AppContainer>
   );
 }

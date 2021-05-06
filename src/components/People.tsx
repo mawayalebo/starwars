@@ -3,6 +3,7 @@ import PersonCard from "./PersonCard";
 import { gql, useQuery } from "@apollo/client";
 import { MouseEventHandler, useState } from "react";
 import PeopleSkeleton from "../Skeletons/PeopleSkeleton";
+import { PersonType } from "../@myTypes";
 const People: React.FC = () => {
     const [pageNo, setPageNo] = useState(1);
     const getPeopleByPage = gql`
@@ -47,7 +48,6 @@ const People: React.FC = () => {
                 </div>
             </PageNumber>
             <PageNumber className="hide-on-large-only">
-                <p>PageNO:</p>
                 <div onClick={ handleDecrement } className="btn btn-small black white-text waves-effect waves-light">
                     <i className="material-icons small white-text">arrow_back</i>
                 </div>
@@ -57,11 +57,27 @@ const People: React.FC = () => {
                 <span>{ pageNo }</span>
             </PageNumber>
             {
-                data && data.peopleByPage.map((person: any, key: number) => (
-                <PersonCard  person={person} key={ key }/>
+                //if data is available
+                data && data.peopleByPage.map((person: PersonType) => (
+                    <div key={person.name}>
+                        <PersonCard  person={person} />
+                    </div>
                 ))
             }
-            {loading && <PeopleSkeleton/>}
+
+            {
+                //if loading
+                loading && <PeopleSkeleton />
+            }
+            {
+                //if error
+                error &&
+                <div className="container">
+                    <div className="center">
+                        <h3 className="white-text">{ error.message }</h3>
+                    </div>
+                </div>
+            }
 
         </PeopleContainer>
      );
@@ -84,6 +100,6 @@ export const PageNumber = styled.div`
     font-size: 30px;
     align-items: center;
     justify-content: ${"space-evenly"};
-    
+
 `;
 export default People;
