@@ -21,19 +21,10 @@ const People: React.FC = () => {
     `
     const { loading, error, data } = useQuery(getPeopleByPage);
     const handleDecrement: MouseEventHandler = (e) => {
-        if (pageNo === 1) {
-            setPageNo(1);
-        } else {
-            setPageNo(pageNo - 1);
-        }
-
+        setPageNo(pageNo === 1 ? 1 : pageNo - 1)
     }
     const handleIncrement: MouseEventHandler = (e) => {
-        if (pageNo === 9) {
-            setPageNo(9);
-        } else {
-            setPageNo(pageNo + 1);
-        }
+        setPageNo(pageNo === 9 ? 9 : pageNo + 1)
     }
     return (
         <PeopleContainer className="container">
