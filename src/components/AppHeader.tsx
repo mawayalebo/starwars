@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import starWarsLogo from "../assets/Star_Wars-Logo.wine.svg";
-export interface AppHeaderProps {
-  
-}
- 
-const AppHeader: React.SFC<AppHeaderProps> = () => {
+
+const AppHeader: React.FC = () => {
   return (
     <div className="app_header">
       <LogoRibbon>
