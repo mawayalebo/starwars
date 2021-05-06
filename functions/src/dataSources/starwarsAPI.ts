@@ -1,15 +1,17 @@
+import { PersonType, HomeWorldType } from './../@myTypes';
 import { RESTDataSource } from "apollo-datasource-rest";
 
-
 class StarwarsAPI extends RESTDataSource {
+  //wrap the starwars api
   constructor() {
     super()
     this.baseURL = "https://swapi.dev/api";
   }
 
+  //getting data
   async getPeopleByPage(page: BigInteger){
     const response = await this.get(`people/?page=${page}`);
-    return response.results.map((person: any) => {
+    return response.results.map((person: PersonType) => {
       return this.PersonReducer(person);
     })
 
@@ -17,7 +19,7 @@ class StarwarsAPI extends RESTDataSource {
 
   async getPeopleByName(name: string){
     const response = await this.get(`people/?search=${name}`);
-    return response.results.map((person: any) => {
+    return response.results.map((person: PersonType) => {
       return this.PersonReducer(person);
     })
 
@@ -29,7 +31,7 @@ class StarwarsAPI extends RESTDataSource {
   }
 
   //reducers
-  PersonReducer = ({ name, gender, height, mass, homeworld }: any):any => {
+  PersonReducer = ({ name, gender, height, mass, homeworld }: PersonType): PersonType => {
     return {
       name,
       gender,
@@ -39,7 +41,7 @@ class StarwarsAPI extends RESTDataSource {
     }
   }
 
-  HomeWorldReducer = ({ name, terrain, population }: any) => {
+  HomeWorldReducer = ({ name, terrain, population }: HomeWorldType): HomeWorldType => {
     return {
       name,
       terrain,

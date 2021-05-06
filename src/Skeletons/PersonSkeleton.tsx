@@ -3,7 +3,7 @@ import styled from "styled-components";
 const PersonSkeleton : React.FC = () => {
   return (
     <SkeletonContainer>
-      <Skeleton variant="rect" height={200} animation="wave" />
+      <Skeleton variant="rect" height={100} animation="wave" />
     </SkeletonContainer>
    );
 }

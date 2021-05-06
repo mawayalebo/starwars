@@ -1,17 +1,20 @@
+import { Context } from 'vm';
+import { PersonType, HomeWorldType, PersonArgumentsType } from './@myTypes';
+
 //resolvers
 export = {
   //parent child relationship
   Person: {
-    homeworld: ({ homeworld }: any, __: any, { dataSources }: any) => {
+    homeworld: ({ homeworld }: PersonType, __: any, { dataSources }: Context): HomeWorldType => {
       return dataSources.starwarsAPI.getHomeWorld(homeworld);
     }
   },
   //root queries
   Query:{
-    peopleByPage:(_: any, { page }: any, { dataSources }: any)=>{
+    peopleByPage:(_: any, { page }: PersonArgumentsType, { dataSources }: Context): PersonType => {
       return dataSources.starwarsAPI.getPeopleByPage(page);
     },
-    peopleByName:(_: any, { name }: any, { dataSources }: any)=>{
+    peopleByName:(_: any, { name }: PersonArgumentsType, { dataSources }: Context): PersonType => {
       return dataSources.starwarsAPI.getPeopleByName(name);
     },
 

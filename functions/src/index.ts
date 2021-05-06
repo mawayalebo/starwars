@@ -16,8 +16,4 @@ const server = new ApolloServer({ typeDefs , resolvers, dataSources, playground:
 
 server.applyMiddleware({ app, path:"/", cors:true });
 
-/*app.listen({ port: 5001 }, () => {
-  console.log(`apollo light folding at ${server.graphqlPath}`);
-})*/
-
 exports.graphql = functions.https.onRequest(app);

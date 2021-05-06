@@ -1,5 +1,6 @@
 import { gql } from "apollo-server-express";
 
+//graphql schema
 const typeDefs = gql`
 
   type Person {
