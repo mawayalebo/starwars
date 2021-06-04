@@ -14,6 +14,5 @@ const dataSources = () => ({ starwarsAPI: new StarwarsAPI() })
 
 const server = new ApolloServer({ typeDefs , resolvers, dataSources, playground:false, introspection:true});
 
-server.applyMiddleware({ app, path:"/", cors:true });
-
 exports.graphql = functions.https.onRequest(app);
+

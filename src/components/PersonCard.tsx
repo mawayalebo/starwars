@@ -6,17 +6,17 @@ const PersonCard: React.FC<any> = ({person, key}) => {
     <CardContainer key={key} id={person.name} className="card" >
       <CardContent className="card-content">
         <h3 className="card-title activator">{ person.name }</h3>
-        <i className="material-icons small white-text right activator">arrow_upward</i>
+        <i className="material-icons small white-text right activator">arrow_right</i>
       </CardContent>
-      <CardReveal className="card-reveal">
+      {/*<CardReveal className="card-reveal">
         <h1 className="card-title">{person.name}<i className="material-icons white-text small right">close</i></h1>
         <p>Gender:  {person.gender}</p>
         <p>Mass:  {person.mass}</p>
         <p>Height:  {person.height}</p>
-        <hr/>
+        <hr />
         <p>Home World</p>
-        <p>{person.homeworld.name }</p>
-      </CardReveal>
+        <p>{person.homeworld.name}</p>
+  </CardReveal>*/}
     </CardContainer>
    );
 }

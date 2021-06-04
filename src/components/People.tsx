@@ -1,40 +1,47 @@
 import styled from "styled-components";
 import PersonCard from "./PersonCard";
 import { gql, useQuery } from "@apollo/client";
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useState, useEffect } from "react";
 import PeopleSkeleton from "../Skeletons/PeopleSkeleton";
 import { PersonType } from "../@myTypes";
+import { page , personName } from "../cache";
+import { Link } from "react-router-dom";
 const People: React.FC = () => {
-    const [pageNo, setPageNo] = useState(1);
-    const getPeopleByPage = gql`
-        query{
-            peopleByPage(page:${pageNo}){
-                name
-                gender
-                mass
-                height
-                homeworld{
-                    name
-                }
-            }
-        }
-    `
-    const { loading, error, data } = useQuery(getPeopleByPage);
+    
+
+    const [pageNumber, setPageNumber] = useState(page());
     const handleDecrement: MouseEventHandler = (e) => {
-        if (pageNo === 1) {
-            setPageNo(1);
+        if (pageNumber === 1) {
+            setPageNumber(1);
         } else {
-            setPageNo(pageNo - 1);
+            setPageNumber(pageNumber - 1);
         }
 
     }
     const handleIncrement: MouseEventHandler = (e) => {
-        if (pageNo === 9) {
-            setPageNo(9);
+        if (pageNumber === 9) {
+            setPageNumber(9);
         } else {
-            setPageNo(pageNo + 1);
+            setPageNumber(pageNumber + 1);
         }
     }
+
+    const clickPerson = (name: string):void => {
+        personName(name);
+    }
+
+    const getPeopleByPage = gql`
+        query{
+            peopleByPage(page:${pageNumber}){
+                name
+            }
+        }
+    `
+    const { loading, error, data } = useQuery(getPeopleByPage);
+
+    useEffect(() => {
+        page(pageNumber);
+    },[page, pageNumber])
     return (
         <PeopleContainer className="container">
             <PageNumber className="hide-on-med-and-down">
@@ -42,7 +49,7 @@ const People: React.FC = () => {
                 <div onClick={ handleDecrement } className="btn btn-small black white-text waves-effect waves-light">
                     <i className="material-icons small white-text">arrow_back</i>
                 </div>
-                <span>{ pageNo }</span>
+                <span>{ pageNumber }</span>
                 <div onClick={ handleIncrement} className="btn btn-small black white-text waves-effect waves-light">
                     <i className="material-icons small white-text">arrow_forward</i>
                 </div>
@@ -54,13 +61,15 @@ const People: React.FC = () => {
                 <div onClick={ handleIncrement} className="btn btn-small black white-text waves-effect waves-light">
                     <i className="material-icons small white-text">arrow_forward</i>
                 </div>
-                <span>{ pageNo }</span>
+                <span>{ pageNumber }</span>
             </PageNumber>
             {
                 //if data is available
                 data && data.peopleByPage.map((person: PersonType) => (
-                    <div key={person.name}>
-                        <PersonCard  person={person} />
+                    <div key={person.name} onClick={(e) => { clickPerson(person.name); } }>
+                        <Link to="/detail">
+                            <PersonCard  person={person} />
+                        </Link>
                     </div>
                 ))
             }

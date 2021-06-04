@@ -19,6 +19,7 @@ class StarwarsAPI extends RESTDataSource {
 
   async getPeopleByName(name: string){
     const response = await this.get(`people/?search=${name}`);
+    console.log(response);
     return response.results.map((person: PersonType) => {
       return this.PersonReducer(person);
     })

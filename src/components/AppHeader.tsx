@@ -4,7 +4,7 @@ import starWarsLogo from "../assets/Star_Wars-Logo.wine.svg";
 const AppHeader: React.FC = () => {
   return (
     <div className="app_header">
-      <LogoRibbon>
+      <LogoRibbon id="top">
         <img src={starWarsLogo} alt="star wars logo"/>
       </LogoRibbon>
     </div>
