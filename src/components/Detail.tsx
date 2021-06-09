@@ -46,18 +46,38 @@ const Detail: React.FC = () => {
                   <Avatar gender={person.gender} name={person.name} />
                 </DetailTop>
                 <DetailMiddle>
-                  <div className="row">
-                    <NameContainer className="col s10 m5 l4">
-                      <p>{person.name}</p>
-                    </NameContainer>
-                  </div>
-                  <div className="carousel">
-                    <a href="" className="carousel-item">
-                    <div className="white"><h1>hello</h1></div>
-                    </a>
-                    <a href="" className="carousel-item">
-                    <div className="white"><h1>hello</h1></div>
-                    </a>
+
+                  <div className="container black">
+                    <div className="container">
+                      <h3 className="white-text">
+                        Hi, my name is {person.name}.
+                        {
+                          person.homeworld.name !== "unknown" && <h3>
+                            I'm from planet {person.homeworld.name}.
+                          </h3>
+                        }
+                        I have a height of {person.height} Centimeters and a mass of {person.mass} Kilograms.
+                        {
+                          person.gender == "female"  || person.gender == "male" &&
+                          <h3>Im a {person.gender} STARWARS character.</h3>
+                        }
+                        {
+                          person.gender === "n/a"  &&
+                          <h3>Im a STARWARS character.</h3>
+                        }
+                        {
+                          person.homeworld.name !== "unknown" ? (
+                            <h3>
+                              My home world ground is mostly made of {person.homeworld.terrain} and
+                               has a population of { person.homeworld.population !=="unknown" && person.homeworld.population } species.
+                            </h3>
+                          ): (
+                            <h3>
+                            </h3>
+                          )
+                        }
+                      </h3>
+                    </div>
                   </div>
                 </DetailMiddle>
               </div>
